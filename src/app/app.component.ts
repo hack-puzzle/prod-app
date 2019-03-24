@@ -27,17 +27,15 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-		this.route.queryParams.subscribe(params => {
-			this.data = params;
-        console.log("Hahaha " + this.data.order);
-      });
-		
+      let concertParam = this.route.snapshot.queryParamMap.get('concert');
+      if (concertParam != null) {
+          console.log('Change concert param to: ' + concertParam);
+          localStorage.setItem('concertParam', concertParam);
+      }
 		
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 	  this.restService.longPolling();
 	  this.restService.messageLongPolling();
-    });
   }
 }

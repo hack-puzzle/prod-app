@@ -8,7 +8,7 @@ import { UpdateService } from './update.service';
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
 	
-	const apiUrl = 'http://hack-university-server.herokuapp.com/' + "radiotapok/";
+	const apiUrl = 'http://hack-university-server.herokuapp.com/';
 
 @Injectable({
 	providedIn: 'root'
@@ -20,7 +20,7 @@ export class RestService {
 	getEvent() {
 		return new Promise((resolve, reject) => {
 			// let headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem('token'));
-			this.http.get(apiUrl + "concert-info")
+			this.http.get(this.getApiUrl() + "concert-info")
 				.subscribe(res => {					
 				//	console.log(res); // log
 					resolve(res);
@@ -33,7 +33,7 @@ export class RestService {
 	
 	signIn(name) {
 		return new Promise((resolve, reject) => {
-			this.http.get(apiUrl+'registration/'+name.userName)
+			this.http.get(this.getApiUrl() + 'registration/' + name.userName)
 				.subscribe(res => {
 					console.log(res); // log
 					resolve(res);
@@ -51,7 +51,7 @@ export class RestService {
 			let body = new HttpParams();
 			body = body.set('text', message.text);
 			body = body.set('userId', message.userId);
-			this.http.post(apiUrl+'send-msg', body, {headers: headers})
+			this.http.post(this.getApiUrl() + 'send-msg', body, {headers: headers})
 				.subscribe(res => {
 					console.log(res); // log
 					resolve(res);
@@ -77,7 +77,7 @@ export class RestService {
 	}
 
 	longPolling() {
-		this.getRequest(apiUrl + "concert-update")
+		this.getRequest(this.getApiUrl() + "concert-update")
 			.then(res => {
 				this.updateService.update(res);
 			})
@@ -87,13 +87,27 @@ export class RestService {
 	}
 	
 	messageLongPolling() {
-		this.getRequest(apiUrl + "chat-update")
+		this.getRequest(this.getApiUrl() + "chat-update")
 			.then(res => {
 				this.updateService.updateMessages(res);
 			})
 			.finally(() => {
 				timer(1000).subscribe(() => this.messageLongPolling());
 			});
+	}
+
+	getApiUrl() {
+		return apiUrl + this.getConcertParam() + '/';
+	}
+
+	getConcertParam() {
+		let concertParam = localStorage.getItem('concertParam');
+		console.log('Current param: ' + concertParam);
+		if (concertParam != null) {
+			return concertParam;
+		} else {
+			return 'team';
+		}
 	}
 	
 }

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { UpdateService } from '../update.service';
 import { RestService } from '../rest.service';
 import { ViewportScroller } from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
+import {NavParams} from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -19,6 +21,7 @@ export class Tab1Page {
 	currentSongId = -1;
 	songList: any[] = [];
 
+	@Input()
 	artistInfo: any;
 
 	secondsRemaining;
@@ -27,9 +30,16 @@ export class Tab1Page {
 
 	constructor(public updateService: UpdateService,
 				public restService: RestService,
-				public scroller: ViewportScroller) {
+				public scroller: ViewportScroller,
+				private route: ActivatedRoute) {
 		if(localStorage.getItem("token")) {
 		//	this.isLoggedIn = true;
+		}
+
+		let concertParam = this.route.snapshot.queryParamMap.get('concert');
+		if (concertParam != null) {
+			console.log('Change concert param to: ' + concertParam);
+			localStorage.setItem('concertParam', concertParam);
 		}
 	}
 

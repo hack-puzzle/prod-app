@@ -1,12 +1,12 @@
 <div style="height: auto">
   <div class="row center">
-    <img src="assets/artists/radiotapok/tapok-icon.png" class="artist-photo center" />
+    <img *ngIf="artistInfo.photoUrl != undefined" src="{{ artistInfo.photoUrl }}" class="artist-photo center" />
   </div>
 
   <!-- Name -->
   <div class="row center name-row" style="padding-top:30px;">
     <ion-text style="font-size:27px; color: #f7f7f7;">
-    Radio Tapok
+    {{ artistInfo.name }}
     </ion-text>
   </div>
 
@@ -14,23 +14,23 @@
   <ion-grid class="row social-icon-row" style="padding-top:30px;">
     <ion-row>
       <ion-col>
-        <img src="assets\icon\FacebookIcon.png" class="social-icon center" />
+        <a href="{{ artistInfo.facebookUrl }}"><img src="assets\icon\FacebookIcon.png" class="social-icon center" /></a>
       </ion-col>
       <ion-col>
-        <img src="assets\icon\YoutubeIcon.png" class="social-icon center" />
+        <a href="{{ artistInfo.youtubeUrl }}"><img src="assets\icon\YoutubeIcon.png" class="social-icon center" /></a>
       </ion-col>
       <ion-col>
-        <img src="assets\icon\InstaIcon.png" class="social-icon center" />
+        <a href="{{ artistInfo.instagramUrl }}"><img src="assets\icon\InstaIcon.png" class="social-icon center" /></a>
       </ion-col>
       <ion-col>
-        <img src="assets\icon\VKIcon.png" class="social-icon center" />
+        <a href="{{ artistInfo.vkUrl }}"><img src="assets\icon\VKIcon.png" class="social-icon center" /></a>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <!-- Reference -->
   <div style="padding-top:60px;" class="row center name-row">
-    <a href="http://radiotapok.ru" style="color:#ffce00;">Radio Tapok</a>
+    <a href="{{ artistInfo.siteUrl }}" style="color:#ffce00;">Radio Tapok</a>
   </div>
 
 </div>
