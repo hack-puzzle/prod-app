@@ -1,5 +1,7 @@
 {
-  "name": "prod-app",
-  "integrations": {},
+  "name": "Concert",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

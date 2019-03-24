@@ -1,0 +1,20 @@
+<ion-header transparent>
+	<ion-toolbar>
+		<ion-title>
+		  Tab Two
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content text-center style="background: none transparent;">
+	<ion-fab bottom right margin>
+		<button ion-fab color="black">
+			<ion-icon name="md-options"></ion-icon>
+		</button>
+		<ion-fab-list side="top">
+			<button (click)="toggleFlashLight()" ion-fab>
+				<ion-icon name="flash"></ion-icon>
+			</button>
+		</ion-fab-list>
+	</ion-fab>
+</ion-content>
