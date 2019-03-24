@@ -9,6 +9,8 @@ import { ViewportScroller } from '@angular/common';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+	
+	data: any;
 
 	signInData = { name: '', approved: false};
 
@@ -32,6 +34,7 @@ export class Tab1Page {
 	}
 
 	ionViewWillEnter(){
+		this.getInfo();
 		if (this.displayTime == undefined && this.startTime != undefined) {
 			this.secondsRemaining = (Date.parse(this.startTime) - Date.now()) / 1000;
 			this.timerTick();
@@ -39,6 +42,18 @@ export class Tab1Page {
 		console.log("hohoho");
 		this.logTime();
 	}
+	
+	getInfo() {
+		this.restService.getEvent().then((res) => {
+			this.data = res;
+			console.log(this.data);
+			this.artistInfo = this.data.artistInfo;
+			this.songList = this.data.songList;
+		}, (err) => {
+			
+		});
+	}
+	
 
 	logTime() {
 		setTimeout(() => {
@@ -59,12 +74,6 @@ export class Tab1Page {
 			console.log("hehehe " + this.notificationList.length + " " + this.startTime + " " + this.updateService.startTime + " " + this.displayTime);
 			this.logTime();
         }, 5000);
-	}
-
-	signIn() {
-		console.log(this.signInData);
-		this.signInData.approved = true;
-		console.log(this.signInData);
 	}
 
 	timerTick() {

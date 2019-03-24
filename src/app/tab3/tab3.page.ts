@@ -11,67 +11,13 @@ export class Tab3Page {
 	
 	data: any;
 	
-	signInData = { name: '', approved: false};
+	approved: boolean = false;
 	
-	msg = { name: '', message: ''};
+	signInData = { userName: ''};
 	
-	myMsgs : any[] = [];
+	msg = { userId: '0', text: ''};
 	
-	messages : any[] = [{
-      "author" : "xyz",
-      "text" : "2019-03-23T22:42:38"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalggggggal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    },{
-      "author" : "xyzz",
-      "text" : "lalalal"
-    }];
+	messages : any[] = [];
 	
 
 	constructor(public updateService: UpdateService,
@@ -96,24 +42,28 @@ export class Tab3Page {
 	}
 	
 	signIn() {
-		if (this.signInData.name != '') {
-			this.signInData.approved = true;
-			console.log(this.signInData);
-			this.msg.name = this.signInData.name;
+		if (this.signInData.userName != '') {
+			this.restService.signIn(this.signInData).then((res) => {
+				this.data = res;
+				this.approved = true;
+				console.log(this.data);
+				this.msg.userId = this.data.userId;
+			}, (err) => {
+				
+			});
 		}
 	}
 
 	
 	sendMessage() {
-		if (this.signInData.approved) {
+		if (this.approved) {
 			console.log(this.msg);
 			this.restService.sendMsg(this.msg).then((res) => {
 				this.data = res;
-				this.myMsgs.push(this.data.id);
 			}, (err) => {
 				
 			});
-			this.msg.message = '';
+			this.msg.text = '';
 		}
 	}
 

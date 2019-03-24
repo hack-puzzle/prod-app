@@ -28,7 +28,7 @@ export class UpdateService {
 	
 	updateMessages(messagesData) {
 		this.messagesData = messagesData;
-		this.messages = this.messagesData.messages;
+		this.messages = this.messagesData.msgList;
 		console.log(messagesData);
 	}
 	
