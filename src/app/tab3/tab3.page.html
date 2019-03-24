@@ -1,13 +1,85 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="--background: #313437; --color: #f7f7f7;">
     <ion-title>
-      Tab Three
+      МТС Концерт
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <app-song-text-slider>
+<ion-content style="--background: #383b3f; --color: #f7f7f7;">
+<!--  <app-song-text-slider>
 
   </app-song-text-slider>
+-->  
+
+  <div id="login" style="--border-color:#313437; --border-style:inset;" *ngIf="signInData.approved == false || signInData.name == ''">
+    <ion-card style="height:35%;width:68%; --background: #42464C;position:fixed; left: 16%;top:42%; z-index:10; border-color:#383b3f; border-style:groove;">
+      <ion-card-header>
+        <ion-card-subtitle style="--color: #f7f7f7; font-size:16px;">
+          <ion-icon style="font-size: 26px;" name="happy"></ion-icon>
+          Как Вас зовут?
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form (submit)="signIn()">
+          <ion-item style="width:80%">
+            <ion-input readonly="false" required [(ngModel)]="signInData.name" name="name" type="text" placeholder="Имя" text-center></ion-input>
+          </ion-item>
+          <br>
+          <button ion-button round icon-end type="submit" >
+            <ion-icon name="checkmark-circle-outline"style = "background: ##ffce00;"></ion-icon>
+          </button>
+        </form>
+      </ion-card-content>
+
+    </ion-card>
+  </div>
+
+  <ion-card style="height:auto; --background: #42464C;"id="news">
+  
+  <ion-card-header >
+        <ion-card-subtitle style="--color: #f7f7f7;">
+          <ion-grid>
+            <ion-col>
+              <ion-icon style="font-size: 26px;" name="list"></ion-icon>
+               </ion-col>
+          <ion-col>
+            Общаемся!
+          </ion-col>
+          </ion-grid>
+
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+	  
+	  <div *ngFor="let message of messages">
+	  {{message.author}}
+      <ion-chip  style="--color: #000000; --background: #ffce00;">
+		<ion-label >{{message.text}}</ion-label>
+      </ion-chip>
+	  </div>
+      </ion-card-content>
+
+    </ion-card>
+	
+  
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar style="--background: #313437; --color: #f7f7f7">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10">
+        <ion-input *ngIf="signInData.approved == false || signInData.name == ''" readonly="true" type="text" placeholder="Type a message" [(ngModel)]="msg.message" name="message"></ion-input>
+		<ion-input *ngIf="signInData.approved == true && signInData.name != ''" readonly="false" type="text" placeholder="Type a message" [(ngModel)]="msg.message" name="message"></ion-input>
+      </ion-col>
+      <ion-col size="1" (click)="sendMessage()">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-toolbar>
+
+</ion-footer>

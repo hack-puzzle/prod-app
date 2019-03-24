@@ -8,89 +8,66 @@
 
 <ion-content style="--background: #383b3f; --color: #f7f7f7;">
 
-      <ion-fab class="butt">
-        <ion-buttons >
-          <ion-grid>
-            <ion-row>
-          <ion-button href="#time" >
-              <ion-icon style="font-size: 26px;" name="time"></ion-icon>
+  <ion-fab class="butt">
+    <ion-buttons>
+      <ion-grid>
+        <ion-row>
+          <ion-button href="#time">
+            <ion-icon style="font-size: 26px;" name="time"></ion-icon>
           </ion-button>
-          </ion-row>
-          <ion-row>
+        </ion-row>
+        <ion-row>
           <ion-button href="#news">
-              <ion-icon style="font-size: 26px;" name="list"></ion-icon>
-            </ion-button>
-            </ion-row>
-            <ion-row>
-        <ion-button (click)="scroller.scrollToAnchor('Info')">
+            <ion-icon style="font-size: 26px;" name="list"></ion-icon>
+          </ion-button>
+        </ion-row>
+        <ion-row>
+          <ion-button (click)="scroller.scrollToAnchor('Info')">
             <ion-icon style="font-size: 26px;" name="information-circle-outline"></ion-icon>
           </ion-button>
-          </ion-row>
-          </ion-grid>
-        </ion-buttons>
-      </ion-fab>
+        </ion-row>
+      </ion-grid>
+    </ion-buttons>
+  </ion-fab>
 
-	<div id="login" *ngIf="signInData.approved == false || signInData.name == ''">
-    <ion-card style="height:250px; --background: #42464C;" >
+  <div id="time" *ngIf="currentSongId == -1" >
+    <ion-card style="height:250px; --background: #42464C;" id="time">
       <ion-card-header>
-        <ion-card-subtitle>
-          <ion-icon name="time"></ion-icon>
-          Как Вас зовут?
+        <ion-card-subtitle style="--color: #f7f7f7; font-size:16px;">
+          <ion-grid>
+            <ion-col>
+              <ion-icon style="font-size: 26px;" name="time"></ion-icon>
+            </ion-col>
+            <ion-col>
+              До начала концерта
+            </ion-col>
+          </ion-grid>
         </ion-card-subtitle>
       </ion-card-header>
 
-      <ion-card-content>
-		<form (submit)="signIn()">
-			<ion-item style="width:80%">
-				<ion-input readonly="false" required [(ngModel)]="signInData.name" name="name" type="text" placeholder="Имя" text-center></ion-input>
-			</ion-item>
-			<br>
-				<button ion-button round icon-end type="submit">
-					<ion-icon name="checkmark-circle-outline"></ion-icon>
-				</button>
-		</form>
-      </ion-card-content>
-
-    </ion-card>
-    </div>
-
-
-    <div id="time" *ngIf="currentSongId == -1">
-    <ion-card style="height:250px; --background: #42464C;"  id="time" >
-      <ion-card-header>
-        <ion-card-subtitle style="--color: #f7f7f7;">
-          <ion-grid>
-            <ion-col><ion-icon style="font-size: 26px;" name="time"></ion-icon></ion-col>
-              <ion-col>
-          До начала концерта
-                </ion-col>
-                  </ion-grid>
-                    </ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content *ngIf="displayTime != undefined && displayTime != '00:00:00'">
-        <ion-fab vertical="center" horizontal="center" >
-          <ion-fab-button  style="--background:#ffce00;--color: #000000; height:130px; width:130px;margin-left:-38px; margin-top:20px;">
-          <p>{{displayTime}}</p>
+      <ion-card-content style="z-index: 5;" *ngIf="displayTime != undefined && displayTime != '00:00:00'">
+        <ion-fab vertical="center" horizontal="center">
+          <ion-fab-button style="--background:#ffce00;--color: #000000; height:130px; width:130px;margin-left:-38px; margin-top:20px; ">
+            <p>{{displayTime}}</p>
           </ion-fab-button>
-      </ion-fab>
+        </ion-fab>
       </ion-card-content>
 
-	  <ion-card-content *ngIf="displayTime != undefined && displayTime == '00:00:00'">
-        <ion-fab vertical="center" horizontal="center" >
+      <ion-card-content *ngIf="displayTime != undefined && displayTime == '00:00:00'">
+        <ion-fab vertical="center" horizontal="center">
           <ion-fab-button color="warning" style="height:130px; width:130px; margin-left:-38px; margin-top:20px;">
-          <p>Концерт начался!</p>
+            <p>Концерт начался!</p>
           </ion-fab-button>
-      </ion-fab>
+        </ion-fab>
       </ion-card-content>
 
     </ion-card>
-    </div>
+  </div>
 
-	<div id="time">
+  <div id="time">
     <ion-card style="height:200px;" *ngIf="currentSongId != -1">
       <ion-card-header>
-        <ion-card-subtitle>
+        <ion-card-subtitle style="--color: #f7f7f7; font-size:16px;">
           <ion-icon name="time"></ion-icon>
           Текущая песня
         </ion-card-subtitle>
@@ -99,51 +76,51 @@
       <ion-card-content>
         <ion-fab vertical="center">
           <ion-fab-button color="warning" style="height:130px; width:130px; margin-left:-38px; margin-top:20px;">
-          <p>{{songList[currentSongId]}}</p>
+            <p>{{songList[currentSongId]}}</p>
           </ion-fab-button>
-      </ion-fab>
+        </ion-fab>
       </ion-card-content>
 
     </ion-card>
 
 
-      <ion-card style="height:200px; --background: #42464C;"id="news">
+    <ion-card style="height:auto; --background: #42464C;" id="news">
 
-      <ion-card-header >
-        <ion-card-subtitle style="--color: #f7f7f7;">
+      <ion-card-header>
+        <ion-card-subtitle style="--color: #f7f7f7;font-size:16px;">
           <ion-grid>
             <ion-col>
               <ion-icon style="font-size: 26px;" name="list"></ion-icon>
-               </ion-col>
-          <ion-col>
-            Новости концерта
-          </ion-col>
+            </ion-col>
+            <ion-col>
+              Новости концерта
+            </ion-col>
           </ion-grid>
 
         </ion-card-subtitle>
       </ion-card-header>
 
       <ion-card-content>
-      <ion-chip *ngFor="let notification of notificationList" style="--color: #000000; --background: #ffce00;">
-        <ion-label >{{notification.text}} {{notification.time}}</ion-label>
-      </ion-chip>
+        <ion-chip *ngFor="let notification of notificationList" style="--color: #000000; --background: #ffce00;">
+          <ion-label>{{notification.text}} {{notification.time}}</ion-label>
+        </ion-chip>
       </ion-card-content>
 
     </ion-card>
 
 
 
-    <ion-card style="height:200px; --background: #42464C;" id="Info" name= "info" class="artist-info-height">
+    <ion-card style="height:200px; --background: #42464C;" id="Info" name="info" class="artist-info-height">
 
-      <ion-card-header >
-        <ion-card-subtitle style="--color: #f7f7f7;">
+      <ion-card-header>
+        <ion-card-subtitle style="--color: #f7f7f7;font-size:16px;">
           <ion-grid>
             <ion-col>
-              <ion-icon  style="font-size: 26px;" name="information-circle-outline"></ion-icon>
+              <ion-icon style="font-size: 26px;" name="information-circle-outline"></ion-icon>
             </ion-col>
-                   <ion-col>
-                     <ion-text>Об исполнителе</ion-text>
-              </ion-col>
+            <ion-col>
+              <ion-text>Об исполнителе</ion-text>
+            </ion-col>
           </ion-grid>
         </ion-card-subtitle>
       </ion-card-header>

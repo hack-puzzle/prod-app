@@ -30,6 +30,21 @@ export class RestService {
 				});
 		});
 	}
+	
+	sendMsg(msg) {
+		return new Promise((resolve, reject) => {
+			let headers = new HttpHeaders();
+			headers.append('content-type', 'application/json');
+			this.http.post(apiUrl+'/sendMsg', msg, {headers: headers})
+				.subscribe(res => {
+					console.log(res); // log
+					resolve(res);
+				}, (err) => {
+					console.log(err); // log
+					reject(err);
+				});
+		});
+	}
 
 	getRequest(url: string) {
 		return new Promise((resolve, reject) => {
@@ -49,10 +64,19 @@ export class RestService {
 		this.getRequest(apiUrl + "concert-update")
 			.then(res => {
 				this.updateService.update(res);
-				timer(5000).subscribe(() => this.longPolling());
 			})
-			.catch(() => {
+			.finally(() => {
 				timer(5000).subscribe(() => this.longPolling());
+			});
+	}
+	
+	messageLongPolling() {
+		this.getRequest(apiUrl + "concert-update")
+			.then(res => {
+				this.updateService.updateMessages(res);
+			})
+			.finally(() => {
+				timer(1000).subscribe(() => this.messageLongPolling());
 			});
 	}
 	

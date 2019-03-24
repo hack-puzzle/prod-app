@@ -25,6 +25,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 	  this.restService.longPolling();
+	  this.restService.messageLongPolling();
     });
   }
 }

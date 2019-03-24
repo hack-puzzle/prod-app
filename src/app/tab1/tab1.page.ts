@@ -24,7 +24,7 @@ export class Tab1Page {
 	hasFinished : boolean = false;
 
 	constructor(public updateService: UpdateService,
-        public restService: RestService,
+				public restService: RestService,
 				public scroller: ViewportScroller) {
 		if(localStorage.getItem("token")) {
 		//	this.isLoggedIn = true;

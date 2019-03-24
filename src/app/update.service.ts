@@ -9,6 +9,9 @@ export class UpdateService {
 	notificationList: any[] = [];
 	currentSongId: any;
 	data: any;
+	
+	messages: any[] = [];
+	messagesData: any;
 
 	constructor() { }
   
@@ -22,4 +25,11 @@ export class UpdateService {
 		this.currentSongId = this.data.currentSongId;
 		console.log(data);
 	}
+	
+	updateMessages(messagesData) {
+		this.messagesData = messagesData;
+		this.messages = this.messagesData.messages;
+		console.log(messagesData);
+	}
+	
 }
