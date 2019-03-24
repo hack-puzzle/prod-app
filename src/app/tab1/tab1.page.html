@@ -8,13 +8,13 @@
 
 <ion-content style="--background: #383b3f; --color: #f7f7f7;">
 
-  <ion-fab class="butt">
+  <!--<ion-fab class="butt">
     <ion-buttons>
       <ion-grid>
         <ion-row>
-          <ion-button href="#time">
+          <a href="#times">
             <ion-icon style="font-size: 26px;" name="time"></ion-icon>
-          </ion-button>
+          </a>
         </ion-row>
         <ion-row>
           <ion-button href="#news">
@@ -28,19 +28,17 @@
         </ion-row>
       </ion-grid>
     </ion-buttons>
-  </ion-fab>
+  </ion-fab>-->
 
   <div id="time" *ngIf="currentSongId == -1" >
     <ion-card style="height:250px; --background: #42464C;" id="time">
       <ion-card-header>
         <ion-card-subtitle style="--color: #f7f7f7; font-size:16px;">
           <ion-grid>
-            <ion-col>
-              <ion-icon style="font-size: 26px;" name="time"></ion-icon>
-            </ion-col>
-            <ion-col>
-              До начала концерта
-            </ion-col>
+            <ion-row>
+              <ion-icon style="font-size: 20px;" name="time"></ion-icon>
+              <ion-label style="position: fixed; margin-left: 26px;">До начала концерта</ion-label>
+            </ion-row>
           </ion-grid>
         </ion-card-subtitle>
       </ion-card-header>
@@ -56,7 +54,7 @@
       <ion-card-content *ngIf="displayTime != undefined && displayTime == '00:00:00'">
         <ion-fab vertical="center" horizontal="center">
           <ion-fab-button color="warning" style="height:130px; width:130px; margin-left:-38px; margin-top:20px;">
-            <p>Концерт начался!</p>
+            <p style="font-size: 20px;">Концерт начался!</p>
           </ion-fab-button>
         </ion-fab>
       </ion-card-content>
@@ -89,12 +87,10 @@
       <ion-card-header>
         <ion-card-subtitle style="--color: #f7f7f7;font-size:16px;">
           <ion-grid>
-            <ion-col>
-              <ion-icon style="font-size: 26px;" name="list"></ion-icon>
-            </ion-col>
-            <ion-col>
-              Новости концерта
-            </ion-col>
+            <ion-row>
+              <ion-icon style="font-size: 20px;" name="list"></ion-icon>
+              <ion-label style="position: fixed; margin-left: 26px;">Новости концерта</ion-label>
+            </ion-row>
           </ion-grid>
 
         </ion-card-subtitle>
@@ -118,12 +114,10 @@
       <ion-card-header>
         <ion-card-subtitle style="--color: #f7f7f7;font-size:16px;">
           <ion-grid>
-            <ion-col>
-              <ion-icon style="font-size: 26px;" name="information-circle-outline"></ion-icon>
-            </ion-col>
-            <ion-col>
-              <ion-text>Об исполнителе</ion-text>
-            </ion-col>
+            <ion-row>
+              <ion-icon style="font-size: 20px;" name="information-circle-outline"></ion-icon>
+              <ion-label style="position: fixed; margin-left: 26px;">Об исполнителе</ion-label>
+            </ion-row>
           </ion-grid>
         </ion-card-subtitle>
       </ion-card-header>
