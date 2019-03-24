@@ -125,10 +125,7 @@
         </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content class="artist-info-height">
-        <app-artist-info class="artist-info-height">
-		<p *ngIf="artistInfo != undefined">
-		{{artistInfo.name}}
-		</p>
+        <app-artist-info class="artist-info-height" [artistInfo]="artistInfo">
 		
 		</app-artist-info>
       </ion-card-content>

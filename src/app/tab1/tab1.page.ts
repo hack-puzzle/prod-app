@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { UpdateService } from '../update.service';
 import { RestService } from '../rest.service';
 import { ViewportScroller } from '@angular/common';
@@ -21,6 +21,7 @@ export class Tab1Page {
 	currentSongId = -1;
 	songList: any[] = [];
 
+	@Input()
 	artistInfo: any;
 
 	secondsRemaining;
