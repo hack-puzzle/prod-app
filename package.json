@@ -4,7 +4,6 @@
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "postinstall": "ionic-app-scripts build",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
