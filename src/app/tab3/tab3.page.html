@@ -23,13 +23,14 @@
 
       <ion-card-content>
         <form (submit)="signIn()">
-          <ion-item style="width:80%">
+          <ion-item>
             <ion-input readonly="false" required [(ngModel)]="signInData.userName" name="name" type="text" placeholder="Имя" text-center></ion-input>
           </ion-item>
-          <br>
-          <button ion-button round icon-end type="submit" >
-            <ion-icon name="checkmark-circle-outline"style = "background: ##ffce00;"></ion-icon>
-          </button>
+		  <p text-center>
+          <ion-button  margin-top="10%" color="warning" shape="round" size="small" type="submit" >
+            <ion-icon style="font-size: 24px;" name="checkmark-circle-outline"></ion-icon> 
+          </ion-button>
+		  </p>
         </form>
       </ion-card-content>
 
@@ -42,10 +43,10 @@
         <ion-card-subtitle style="--color: #f7f7f7;">
           <ion-grid>
             <ion-col>
-              <ion-icon style="font-size: 26px;" name="list"></ion-icon>
+              <ion-icon style="font-size: 26px;" name="contacts"></ion-icon>
                </ion-col>
           <ion-col>
-            Общаемся!
+            Здесь мы общаемся!
           </ion-col>
           </ion-grid>
 
@@ -55,16 +56,18 @@
       <ion-card-content>
 	  
 	  <div *ngFor="let message of messages" style="display: flex">
-	  <div *ngIf="message.userId == msg.userId" style="margin-left: auto;">
-      <ion-chip style="--color: #000000; --background: #ffce00; right: 10px;">
-		<ion-label > {{message.text}} <br> {{message.userName}}</ion-label>
+	  
+      <ion-chip *ngIf="message.userId == msg.userId" style="--color: #000000; --background: #ffce00; margin-left: auto;">
+		<ion-label > {{message.text}}</ion-label>
       </ion-chip>
-	  </div>
-	  <div *ngIf="message.userId != msg.userId" style="float: left;">
-      <ion-chip style="--color: #000000; --background: #ffce00; right: 10px;">
-		<ion-label > {{message.text}} <br> {{message.userName}}</ion-label>
+
+      <ion-chip *ngIf="message.userId != msg.userId" style="--color: #85c545; --background: #313437; --max-width: 90%; height: auto; margin-right: auto;">
+		<ion-label > 
+			<em style="font-size: 7pt;">{{message.userName}}</em>
+			<p style="font-size: 10pt; color: #f7f7f7;">- {{message.text}}</p>
+		</ion-label>
       </ion-chip>
-	  </div>
+
 	  </div>
       </ion-card-content>
 
@@ -76,13 +79,15 @@
 <ion-footer>
   <ion-toolbar style="--background: #313437; --color: #f7f7f7">
   <ion-grid>
-    <ion-row>
+    <ion-row style="width:90%">
       <ion-col size="10">
         <ion-input *ngIf="approved == false || signInData.userName == ''" readonly="true" type="text" placeholder="Type a message" [(ngModel)]="msg.text" name="message"></ion-input>
 		<ion-input *ngIf="approved == true && signInData.userName != ''" readonly="false" type="text" placeholder="Type a message" [(ngModel)]="msg.text" name="message"></ion-input>
       </ion-col>
-      <ion-col size="1" (click)="sendMessage()">
-        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <ion-col size="1" >
+			<ion-button color="warning" shape="round" size="small" (click)="sendMessage()" >
+            <ion-icon style="font-size: 24px;" name="checkmark-circle-outline"></ion-icon> 
+          </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
