@@ -102,7 +102,10 @@
 
       <ion-card-content>
         <ion-chip *ngFor="let notification of notificationList" style="--color: #000000; --background: #ffce00;">
-          <ion-label>{{notification.text}} <br> {{notification.time}}</ion-label>
+          	<ion-label > 
+				<em style="font-size: 7pt;">{{notification.time}}</em>
+				<p style="font-size: 14pt; color: #f7f7f7;">{{notification.text}}</p>
+			</ion-label>
         </ion-chip>
       </ion-card-content>
 
